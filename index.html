@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Dolby.io with DeepAR.ai</title>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@voxeet/voxeet-web-sdk@3.7.0/dist/voxeet-sdk.js"
+        integrity="sha256-2Y7a1//5LFoSgPzDLpvrynibj5Qrzv/Je7AAXnZm8SA="
+        crossorigin="anonymous"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/deepar@4.0.1/js/deepar.js"
+        integrity="sha256-aD1iu49/ub7YvI2r04hvOSKyP5OJr+gKV2yNAQIFGi0="
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="form-deepar">
+        <!-- Form to provide the license key for https://deepar.ai -->
+        <label>Deep AR License</label>
+        <input id="deepar-license" value="" />
+        <button id="btn-init-deepar">Initialize Deep AR</button>
+    </div>
+
+    <div id="form-dolbyio">
+        <!-- Form to provide the Dolby.io access token -->
+        <label>Dolby.io Access Token</label>
+        <input id="dolbyio-access-token" value="" />
+        <button id="btn-init-dolbyio">Initialize Dolby.io</button>
+    </div>
+
+    <div id="app" style="display: none;">
+        <h1 id="name-message">Logging in...</h1>
+
+        <!-- Join or Leave a Conference -->
+        <div id="form-conference">
+            <label>Conference alias:</label>
+            <input id="alias-input" value="Dolby.io - DeepAR.ai" />
+            <button id="btn-join">Join</button>
+            <button id="btn-leave" disabled>Leave</button>
+        </div>
+        
+        <!-- Actions on Video -->
+        <div id="form-actions">
+            <button id="btn-change-effect" disabled>Change effect</button>
+            <button id="btn-start-video" disabled>Start video</button>
+            <button id="btn-stop-video" disabled>Stop video</button>
+        </div>
+
+        <canvas id="local-video" style="display: none;"></canvas>
+
+        <!-- Display the list of participants -->
+        <div id="participants">
+            <h3>Participants</h3>
+            <ul id="participants-list"></ul>
+        </div>
+
+        <!-- Container for the video streams -->
+        <div id="video-container"></div>
+    </div>
+    <script type="text/javascript" src="scripts.js"></script>
+</body>
+</html>
