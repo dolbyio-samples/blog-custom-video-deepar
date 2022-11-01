@@ -4,28 +4,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Dolby.io with DeepAR.ai</title>
     <script
-        src="https://cdn.jsdelivr.net/npm/@voxeet/voxeet-web-sdk@3.7.0/dist/voxeet-sdk.js"
-        integrity="sha256-2Y7a1//5LFoSgPzDLpvrynibj5Qrzv/Je7AAXnZm8SA="
+        src="https://cdn.jsdelivr.net/npm/@voxeet/voxeet-web-sdk/dist/voxeet-sdk.js"
         crossorigin="anonymous"></script>
     <script
-        src="https://cdn.jsdelivr.net/npm/deepar@4.0.1/js/deepar.js"
-        integrity="sha256-aD1iu49/ub7YvI2r04hvOSKyP5OJr+gKV2yNAQIFGi0="
+        src="https://cdn.jsdelivr.net/npm/deepar/js/deepar.js"
         crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div id="form-deepar">
+    <div id="form-init">
         <!-- Form to provide the license key for https://deepar.ai -->
         <label>Deep AR License</label>
         <input id="deepar-license" value="" />
-        <button id="btn-init-deepar">Initialize Deep AR</button>
-    </div>
+    
+        <br/>
 
-    <div id="form-dolbyio">
         <!-- Form to provide the Dolby.io access token -->
         <label>Dolby.io Access Token</label>
         <input id="dolbyio-access-token" value="" />
-        <button id="btn-init-dolbyio">Initialize Dolby.io</button>
+    
+        <br/>
+
+        <button id="btn-init">Initialize</button>
     </div>
 
     <div id="app" style="display: none;">

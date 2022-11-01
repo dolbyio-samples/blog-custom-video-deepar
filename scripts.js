@@ -1,5 +1,5 @@
-// Specify the version of DeepAR and where to download it
-const deepARRoot = 'https://cdn.jsdelivr.net/npm/deepar@4.0.1';
+// Specify where to download the DeepAR resources
+const deepARRoot = 'https://cdn.jsdelivr.net/npm/deepar';
 
 // Provide your DeepAR license key
 const DEEP_AR_LICENSE_KEY = '';
@@ -11,8 +11,9 @@ const ACCESS_TOKEN = '';
 const names = ['Alison', 'Kendra', 'Azaria', 'Evaline', 'Fredrick', 'Lexi', 'Cyprian', 'Audrey'];
 let randomName = names[Math.floor(Math.random() * names.length)];
 
-// DeepAR effects
-// https://docs.deepar.ai/deepar-sdk/deep-ar-sdk-for-web/getting-started/
+// DeepAR video effects
+// https://docs.deepar.ai/deep-ar-studio/free-filter-pack/
+// https://github.com/DeepARSDK/quickstart-web-js-npm
 const effects = [
   './effects/8bitHearts.deepar',
   './effects/Elephant_Trunk.deepar',
@@ -34,15 +35,14 @@ const effects = [
   './effects/viking_helmet.deepar',
 ];
 
+// Index of the currently selected video effect
 let currentEffectIdx = -1;
 
 let deepAR = null;
 
 const inputLicense = document.getElementById('deepar-license');
 const inputAccessToken = document.getElementById('dolbyio-access-token');
-const btnInitDeepAr = document.getElementById('btn-init-deepar');
-const btnInitDolbyIo = document.getElementById('btn-init-dolbyio');
-const appElement = document.getElementById('app');
+const btnInit = document.getElementById('btn-init');
 const btnJoin = document.getElementById('btn-join');
 const inputConferenceAlias = document.getElementById('alias-input');
 const btnLeave = document.getElementById('btn-leave');
@@ -51,7 +51,7 @@ const btnStartVideo = document.getElementById('btn-start-video');
 const btnStopVideo = document.getElementById('btn-stop-video');
 const canvasLocalVideo = document.getElementById('local-video');
 
-btnInitDeepAr.onclick = async () => {
+btnInit.onclick = async () => {
   // Initialize DeepAR SDK
   // https://s3.eu-west-1.amazonaws.com/sdk.developer.deepar.ai/doc/web/classes/DeepAR.html#constructor
   deepAR = new DeepAR({
@@ -70,14 +70,6 @@ btnInitDeepAr.onclick = async () => {
 
   deepAR.downloadFaceTrackingModel(`${deepARRoot}/models/face/models-68-extreme.bin`);
 
-  // Hide the DeepAR form
-  document.getElementById('form-deepar').setAttribute('style', 'display: none;');
-  if (inputAccessToken.value && inputAccessToken.value.length) {
-    appElement.removeAttribute('style');
-  }
-};
-
-btnInitDolbyIo.onclick = async () => {
   // Initialize the Dolby.io SDK
   // Please read the documentation at:
   // https://docs.dolby.io/communications-apis/docs/initializing-javascript
@@ -94,14 +86,14 @@ btnInitDolbyIo.onclick = async () => {
   // Open a session for the user
   await VoxeetSDK.session.open({ name: randomName });
 
-  const nameMessage = document.getElementById('name-message');
-  nameMessage.innerHTML = `You are logged in as ${randomName}`;
+  // Display the name of the local participant
+  document.getElementById('name-message').innerHTML = `You are logged in as ${randomName}`;
 
-  // Hide the Dolby.io form
-  document.getElementById('form-dolbyio').setAttribute('style', 'display: none;');
-  if (inputLicense.value && inputLicense.value.length) {
-    appElement.removeAttribute('style');
-  }
+  // Hide the initialization form
+  document.getElementById('form-init').setAttribute('style', 'display: none;');
+
+  // Display the application
+  document.getElementById('app').removeAttribute('style');
 };
 
 btnJoin.onclick = async () => {
@@ -132,9 +124,9 @@ btnJoin.onclick = async () => {
     const joinOptions = {
       constraints: {
         audio: true,
-        video: true
+        video: true,
       },
-      customVideoTrack: track
+      customVideoTrack: track,
     };
 
     // 2. Join the conference
@@ -294,12 +286,9 @@ const queryParams = new URLSearchParams(window.location.search);
 inputLicense.value = queryParams.get('license') || DEEP_AR_LICENSE_KEY;
 inputAccessToken.value = queryParams.get('token') || ACCESS_TOKEN;
 
-if (inputLicense.value && inputLicense.value.length) {
+if (inputLicense.value && inputLicense.value.length
+    && inputAccessToken.value && inputAccessToken.value.length) {
   // The DeepAR license is available
-  btnInitDeepAr.click();
-}
-
-if (inputAccessToken.value && inputAccessToken.value.length) {
   // The Dolby.io access token is available
-  btnInitDolbyIo.click();
+  btnInit.click();
 }
