@@ -1,6 +1,6 @@
-# Blog post - Send a custom video with the Dolby.io Web SDK and DeepAR.io
+# Blog post - Send a Custom Video Using DeepAR.io and the Dolby.io Web SDK
 
-This repository contains a sample application for the blog post {INSERT BLOG POST NAME}. It allows you to use [DeepAR](https://deepar.io) to create custom video filter and inject them into a Dolby.io conference.
+This repository contains a sample application for the blog post [Send a Custom Video Using DeepAR.io and the Dolby.io Web SDK](https://dolby.io/blog/send-a-custom-video-using-deepar-io-and-the-dolby-io-web-sdk/). It allows you to use [DeepAR](https://deepar.io) to create custom video filter and inject them into a Dolby.io conference.
 
 ## Requirements
 
